@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Hero</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="instant-search/css/style.css" />
+</head>
+
+<body>
+    <div id="searchUsers" class="instant-search">
+
+        <h1>Search for your favourite Superhero</h1>
+        <div class="instant-search__input-container">
+            <input id="search-box" class="instant-search__input" type="text" spellcheck="false" placeholder="Search Box" />
+
+            <a class="icon-container">
+                <i class="material-icons instant-search__icon">search</i>
+            </a>
+        </div>
+    </div>
+    <div class="instant-search__results-container">
+        <ul class="instant-search__list" id="instant-search__list"></ul>
+    </div>
+
+    <div id="hero-details"></div>
+    <script src="./instant-search/js/instant-search.js"></script>
+</body>
+
+</html>
