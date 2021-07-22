@@ -1,0 +1,50 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="light.css" />
+    <!-- Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+
+<body class="body">
+
+    <h1 class="title">STOP WATCH</h1>
+
+    <!-- Changes our theme color from light to dark and dark to light -->
+    <div id="changetheme">
+        <button id="toggleTheme2" class="togglebtn2">
+        </button>
+        <button id="toggleTheme1" class="togglebtn1">
+        </button>
+
+    </div>
+
+    <!-- Circle design for the stop timer  -->
+    <div class="outer-circle">
+        <div>
+            <p id="stopwatch" class="displaytime">
+                00:00:00</p>
+        </div>
+    </div>
+
+    <!-- Start, Stop and Reset Button -->
+    <div style="text-align: center; padding: 20px;">
+        <button id="start" type="button" class="btn btn-outline-primary">START</button>
+        <button id="stop" type="button" class="btn btn-outline-danger">STOP</button>
+        <button id="reset" type="button" class="btn btn-outline-warning">RESET</button>
+    </div>
+
+
+    <!-- External JS file -->
+    <script src="index.js"></script>
+
+</body>
+
+</html>
