@@ -10,7 +10,9 @@
     font-size: 55px;
 }
 
+
 /* Changes our theme color from light to dark and dark to light */
+
 #changetheme {
     margin: 20px auto;
     text-align: center;
@@ -34,7 +36,9 @@
     border-radius: 50%;
 }
 
+
 /* Circle design for the stop timer */
+
 .outer-circle {
     background: rgba(0, 0, 0, 0.5);
     margin: auto;
@@ -42,7 +46,7 @@
     position: relative;
     width: 400px;
     height: 400px;
-    border-radius: 100%;
+    border-radius: 25%;
     display: table;
 }
 
@@ -51,7 +55,7 @@
     text-align: center;
     width: 400px;
     height: 400px;
-    border-radius: 100%;
+    border-radius: 25%;
 }
 
 .displaytime {
@@ -61,7 +65,9 @@
     font-size: 70px;
 }
 
+
 /* Start, Stop and Reset Button  */
+
 .btn {
     border-radius: 25px;
     padding: 10px 40px;
