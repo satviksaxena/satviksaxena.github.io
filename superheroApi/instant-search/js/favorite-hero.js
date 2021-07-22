@@ -1,8 +1,8 @@
 var mainDiv = document.getElementById("main-div");
 
-Object.keys(localStorage).forEach(function (key) {
-   var heroDetail = JSON.parse(localStorage.getItem(key));
-   const item = `<div class="card">
+Object.keys(localStorage).forEach(function(key) {
+    var heroDetail = JSON.parse(localStorage.getItem(key));
+    const item = `<div class="card">
                         <div class="image">
                             <img src="${heroDetail.image.url}">
                         </div>
@@ -18,22 +18,22 @@ Object.keys(localStorage).forEach(function (key) {
                             <p>Eye Color : ${heroDetail.appearance["eye-color"]}</p>
                             <p>Hair Color : ${heroDetail.appearance["hair-color"]}</p>
                             <p>Publisher : ${heroDetail.biography.publisher}</p>
-                            <button id = ${heroDetail.id} >Unavorite</button>
+                            <button id = ${heroDetail.id} >UnFavorite</button>
                         </div>
                     </div>`;
 
-   const position = "beforeend";
-   mainDiv.insertAdjacentHTML(position, item);
+    const position = "beforeend";
+    mainDiv.insertAdjacentHTML(position, item);
 });
 /*Function will handle click on un-favorite button*/
 mainDiv.addEventListener("click", (event) => {
-   var heroId = event.target.id;
-   event.target.parentNode.parentNode.parentNode.removeChild(
-      event.target.parentNode.parentNode
-   );
-   localStorage.removeItem(heroId);
+    var heroId = event.target.id;
+    event.target.parentNode.parentNode.parentNode.removeChild(
+        event.target.parentNode.parentNode
+    );
+    localStorage.removeItem(heroId);
 });
 /*Function handel the search btn click*/
 document.getElementById("search-btn").addEventListener("click", () => {
-   location.replace("./index.html");
+    location.replace("./index.html");
 });
