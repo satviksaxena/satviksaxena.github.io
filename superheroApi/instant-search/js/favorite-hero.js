@@ -18,7 +18,7 @@ Object.keys(localStorage).forEach(function(key) {
                             <p>Eye Color : ${heroDetail.appearance["eye-color"]}</p>
                             <p>Hair Color : ${heroDetail.appearance["hair-color"]}</p>
                             <p>Publisher : ${heroDetail.biography.publisher}</p>
-                            <button id = ${heroDetail.id}>UnFavorite</button>
+                            <button id = ${heroDetail.id}>Un Favourite</button>
                         </div>
                     </div>`;
 
