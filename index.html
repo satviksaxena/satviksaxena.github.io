@@ -1,185 +1,128 @@
-<!DOCTYPE HTML>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Satvik Porfolio</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satvik Saxena - Portfolio</title>
+    <!-- Star Emoji Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<body>
+    <canvas id="bg-canvas"></canvas>
 
-<body class="is-preload">
-
-    <!-- Wrapper -->
-    <div id="wrapper" class="fade-in">
-
-        <!-- Intro -->
-        <div id="intro">
-            <h1>My Portfolio</h1>
-            <p>A showcase of my projects and my abilities.</p>
-            <ul class="actions">
-                <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-            </ul>
-        </div>
-
-        <!-- Header -->
-        <header id="header">
-            <a href="index.html" class="logo">Hello World</a>
+    <div class="container">
+        
+        <!-- Header / Intro -->
+        <header>
+            <div class="profile-img-container">
+                <img src="images/satvik-profile-pic.jpeg" alt="Satvik Saxena" class="profile-img">
+            </div>
+            <h1>Satvik Saxena</h1>
+            <p class="subtitle">Data Engineer & Software Developer based in Trier, Germany. Turning complex data problems into scalable, automated solutions.</p>
+            <div class="actions">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="mailto:satviksaxena1@gmail.com" class="btn btn-outline">Contact Me</a>
+            </div>
         </header>
 
-        <!-- Nav -->
-        <nav id="nav">
-            <ul class="links">
-                <li class="active">
-                    <a href="index.html"></a>
-                </li>
-            </ul>
-            <ul class="icons">
-                <li><a href="#" class="icon fa-linkedin"><span class="label">Instagram</span></a></li>
-                <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-            </ul>
-        </nav>
+        <!-- Projects Section -->
+        <h2 class="section-title reveal" id="projects">Featured Work</h2>
+        
+        <div class="projects-grid">
+            
+            <!-- Project 1: NASA ETL -->
+            <div class="project-card reveal">
+                <div class="project-icon-wrapper">
+                    <img src="images/nasa_etl.png" alt="NASA ETL Pipeline" class="project-icon">
+                </div>
+                <div class="project-content">
+                    <h3>NASA Log Processing ETL Pipeline</h3>
+                    <p>An end-to-end Data Engineering pipeline extracting historical HTTP logs from NASA, processing them using Apache Airflow, storing in AWS RDS PostgreSQL, and visualizing insights with a Streamlit dashboard.</p>
+                    <a href="https://github.com/satviksaxena/Nasa-Log-Processing-ETL-Pipeline" target="_blank" class="btn btn-outline">View on GitHub</a>
+                </div>
+            </div>
 
-        <!-- Main -->
-        <div id="main">
+            <!-- Project 2: AWS Data Warehouse -->
+            <div class="project-card reveal">
+                <div class="project-icon-wrapper">
+                    <img src="images/aws_dashboard.png" alt="AWS Data Warehouse" class="project-icon">
+                </div>
+                <div class="project-content">
+                    <h3>AWS Data Warehouse & Dashboard</h3>
+                    <p>A production-ready ETL pipeline and interactive dashboard for financial transactions. Built entirely on AWS Cloud Infrastructure (S3, Redshift Serverless, Airflow) implementing a Kimball Star Schema.</p>
+                    <a href="https://github.com/satviksaxena/Aws-Data-Warehouse-Dashboard" target="_blank" class="btn btn-outline">View on GitHub</a>
+                </div>
+            </div>
 
-            <!-- Featured Post -->
-            <article class="post featured">
-                <header class="major">
+            <!-- Project 3: Python Excel Automation -->
+            <div class="project-card reveal">
+                <div class="project-icon-wrapper">
+                    <img src="images/python_excel.png" alt="Python Excel Automation" class="project-icon">
+                </div>
+                <div class="project-content">
+                    <h3>Python Excel Automation</h3>
+                    <p>Showcases Pandas, NumPy, OS, and Matplotlib advanced components. Automatically clones complex Excel features like pivot tables and group-bys directly into Python code for automated reporting.</p>
+                    <a href="https://github.com/satviksaxena/PythonExcelAutomation" target="_blank" class="btn btn-outline">View on GitHub</a>
+                </div>
+            </div>
 
-                    <h2><a href="#">Hi. I’m Satvik, a software developer from Chennai, India. Please take a look around!</a></h2>
-                    <p>I'm a passionate developer but more importantly I'm passionate about technology.</p>
-                </header>
-                <a href="#" class="image main"><img src="images/pic011.jpg" alt="" /></a>
-                <ul class="actions special">
-                    <li><a href="https://drive.google.com/open?id=1qRU0Fxmy10zMJpmgI43_FmQSpBcU6ThJ" class="button large">Check it out/Download</a></li>
-                </ul>
-            </article>
+        </div>
 
-            <!-- Posts -->
-            <section class="posts">
-                <article>
-                    <header>
+        <!-- Resume Section -->
+        <h2 class="section-title reveal">Resume</h2>
+        <div class="resume-section reveal">
+            <a href="images/resume.jpg" target="_blank" title="Click to open full size">
+                <img src="images/resume.jpg" alt="Satvik Saxena Resume" class="resume-img">
+            </a>
+        </div>
 
-                        <h2><a href="#">Project 1<br />
-										Cursor control using Eye movement</a></h2>
-                    </header>
-                    <a href="https://github.com/satviksaxena/cursor_control_using_eye_movement.git" class="image fit"><img src="images/pic021.jpg" alt="" /></a>
-                    <p>A machine learning project to control cursor using eye movement.</p>
-                    <ul class="actions special">
-                        <li><a href="https://github.com/satviksaxena/cursor_control_using_eye_movement.git" class="button">Full Story</a></li>
-                    </ul>
-                </article>
-                <article>
-                    <header>
-
-                        <h2><a href="#">Project 2<br />
-										Pizels </a></br>
-                            </br>
-                        </h2>
-                    </header>
-                    <a href="https://github.com/satviksaxena/pizels" class="image fit"><img src="images/pic031.jpg" alt="" /></a>
-                    <p>Php and MySql project where Photographers can upload their Stock photographs and the Users download their images for their Wesites or Personal use</p>
-                    <ul class="actions special">
-                        <li><a href="https://github.com/satviksaxena/pizels" class="button">Full Story</a></li>
-                    </ul>
-                </article>
-
-                <article>
-                    <header>
-
-                        <h2><a href="#">Project 3<br />
-										ReturnX </a></br>
-                            </br>
-                        </h2>
-                    </header>
-                    <a href="" class="imagefit"><img src="images/ms.png" alt="" /></a>
-                    <p>Spring Boot Microservice based project to fetch order details </p>
-                    <ul class="actions special">
-                        <li><a href="/project-returnx.html" class="button">Full Story</a></li>
-                    </ul>
-                </article>
-
-                <article>
-                    <header>
-
-                        <h2><a href="#">Project 4<br />
-										Node JS Playground </a></br>
-                            </br>
-                        </h2>
-                    </header>
-                    <a href="https://github.com/satviksaxena/pizels" class="image fit"><img src="images/pic031.jpg" alt="" /></a>
-                    <p>Contains multiple projects for JavaScript</p>
-                    <ul class="actions special">
-                        <li><a href="/project-jsplay.html" class="button">Full Story</a></li>
-                    </ul>
-                </article>
-            </section>
-
-
-
-            <section>
-
-                <header>
-
-                    <h2>
-                        <p style="text-align:left">About<br />
-                        </p>
-                    </h2>
-                </header>
-                <p>This site is a sectional collection of projects on which I've worked on, posts that I have written and my Technical Skills.</p>
-                <p> I’m an undergrad right now majoring in IT but interested in computer science in general. I like to solve problems on Hackerrank and other coding platforms. I also enjoy participating in programming competitions once in a while . I enjoy
-                    taking complex problems and turning them into simple and beautiful code.</p>
-                <p>I'm obsessed with learning new things and even more obsessed with building things with my own hands. I like doing things in a organized, systematic way and I believe that knowledge teamwork and persistence is the secret sauce for achieving
-                    the impossible.</br>
-                    Feel free to contact me on my email given below.
-                </p>
-
-            </section>
-
-
+        <!-- About Section -->
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="about-section reveal">
+            <p>I am currently pursuing a <strong>Master's in Data Science at the University of Trier, Germany</strong>.</p>
+            <p>Previously, I worked as a Software Engineer at Soroco, where I designed and maintained highly scalable data pipelines on AWS for the Amazon Finance team. By optimizing data ingestion and transformation workflows with Python and PostgreSQL, I improved automation efficiency by 19% and processed over 4,000 monthly invoices.</p>
+            <p>I am highly proficient in <strong>Python, Java, SQL, AWS, and building end-to-end data pipelines</strong>. I specialize in turning complex data into clean architectures and actionable insights.</p>
         </div>
 
         <!-- Footer -->
-        <footer id="footer">
-            <section class="split contact">
-
-                <section>
-                    <h3>Phone</h3>
-                    <p><a href="#">(+91)7017621680</a></p>
-                </section>
-                <section>
-                    <h3>Email</h3>
-                    <p><a href="#">satviksamb_anup@srmuniv.edu.in</a></p>
-                </section>
-
-                <section>
-                    <h3>Social</h3>
-                    <ul class="icons alt">
-                        <!-- <li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li> -->
-                        <li><a href="https://www.facebook.com/anupsatvik" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-                        <li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-                        <li><a href="https://github.com/satviksaxena" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-                    </ul>
-                </section>
-            </section>
+        <footer class="reveal">
+            <div class="social-links">
+                <a href="https://bit.ly/satvik-linkedin" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/satviksaxena" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://bit.ly/satvik-leetcode" target="_blank" title="LeetCode"><i class="fas fa-code"></i></a>
+                <a href="https://instagram.com/satviksaxena__" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:satviksaxena1@gmail.com">satviksaxena1@gmail.com</a></p>
+                <p>Phone: +49 155 10511507</p>
+                <p style="margin-top: 20px; font-size: 12px; color: var(--text-secondary);">&copy; 2026 Satvik Saxena. All rights reserved.</p>
+            </div>
         </footer>
-
-
 
     </div>
 
-    <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery.scrollex.min.js"></script>
-    <script src="assets/js/jquery.scrolly.min.js"></script>
-    <script src="assets/js/browser.min.js"></script>
-    <script src="assets/js/breakpoints.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <script src="assets/js/main.js"></script>
-
+    <!-- Scroll Animation Script -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+    <script src="particles.js"></script>
 </body>
-
 </html>
