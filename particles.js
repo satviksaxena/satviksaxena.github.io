@@ -8,6 +8,22 @@ let mouse = {
     radius: 150
 }
 
+let isDarkMode = document.body.classList.contains('dark-mode');
+
+// Listen for mode changes to re-init the game background
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+            let wasDarkMode = isDarkMode;
+            isDarkMode = document.body.classList.contains('dark-mode');
+            if (wasDarkMode !== isDarkMode) {
+                init(); // Reinitialize particles for new theme
+            }
+        }
+    });
+});
+observer.observe(document.body, { attributes: true });
+
 window.addEventListener('mousemove', function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
@@ -21,21 +37,31 @@ window.addEventListener('mouseout', function() {
 window.addEventListener('click', function(event) {
     mouse.x = event.x;
     mouse.y = event.y;
+    
+    // In Dark Mode, the blast is 2x stronger and radius is bigger!
+    let blastRadius = isDarkMode ? 400 : 300;
+    let blastStrength = isDarkMode ? 45 : 25;
+
     for (let i = 0; i < particlesArray.length; i++) {
         let dx = particlesArray[i].x - mouse.x;
         let dy = particlesArray[i].y - mouse.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < 300) {
+        if (distance < blastRadius) {
             let forceDirectionX = dx / distance;
             let forceDirectionY = dy / distance;
-            let force = (300 - distance) / 300;
+            let force = (blastRadius - distance) / blastRadius;
             
-            let directionX = forceDirectionX * force * 25;
-            let directionY = forceDirectionY * force * 25;
+            let directionX = forceDirectionX * force * blastStrength;
+            let directionY = forceDirectionY * force * blastStrength;
             
             particlesArray[i].speedX += directionX;
             particlesArray[i].speedY += directionY;
+            
+            // In dark mode, clicking causes them to flash a bright color temporarily
+            if (isDarkMode) {
+                particlesArray[i].color = 'rgba(0, 255, 255, 0.8)'; // Neon Cyan blast flash
+            }
         }
     }
 });
@@ -47,7 +73,7 @@ window.addEventListener('resize', function() {
 });
 
 class Particle {
-    constructor(x, y, directionX, directionY, size, color) {
+    constructor(x, y, directionX, directionY, size, color, baseColor) {
         this.x = x;
         this.y = y;
         this.directionX = directionX;
@@ -56,13 +82,21 @@ class Particle {
         this.speedY = directionY;
         this.size = size;
         this.color = color;
-        this.friction = 0.92;
+        this.baseColor = baseColor;
+        this.friction = isDarkMode ? 0.95 : 0.92;
     }
 
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
         ctx.fillStyle = this.color;
+        // In dark mode, add a glow effect
+        if (isDarkMode) {
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+        } else {
+            ctx.shadowBlur = 0;
+        }
         ctx.fill();
     }
 
@@ -93,12 +127,19 @@ class Particle {
         if (distance < mouse.radius) {
             let forceDirectionX = dx / distance;
             let forceDirectionY = dy / distance;
-            this.x -= forceDirectionX * 0.5;
-            this.y -= forceDirectionY * 0.5;
+            // Dark mode pushes them away faster
+            let repelMultiplier = isDarkMode ? 1.5 : 0.5;
+            this.x -= forceDirectionX * repelMultiplier;
+            this.y -= forceDirectionY * repelMultiplier;
         }
 
         this.x += this.speedX;
         this.y += this.speedY;
+        
+        // Restore color slowly after a blast
+        if (this.color !== this.baseColor) {
+             this.color = this.baseColor;
+        }
 
         this.draw();
     }
@@ -106,17 +147,25 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 12000;
+    
+    // In dark mode, slightly more particles for a denser space network
+    let density = isDarkMode ? 9000 : 12000;
+    let numberOfParticles = (canvas.height * canvas.width) / density;
     
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 3) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
         let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 1.5) - 0.75;
-        let directionY = (Math.random() * 1.5) - 0.75;
-        let color = 'rgba(0, 113, 227, 0.4)';
+        
+        // Dark mode particles are faster
+        let speedMultiplier = isDarkMode ? 2.5 : 1.5;
+        let directionX = (Math.random() * speedMultiplier) - (speedMultiplier / 2);
+        let directionY = (Math.random() * speedMultiplier) - (speedMultiplier / 2);
+        
+        let color = isDarkMode ? 'rgba(41, 151, 255, 0.8)' : 'rgba(0, 113, 227, 0.4)';
+        let baseColor = color;
 
-        particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+        particlesArray.push(new Particle(x, y, directionX, directionY, size, color, baseColor));
     }
 }
 
@@ -132,16 +181,23 @@ function animate() {
 
 function connect() {
     let opacityValue = 1;
+    let connectionDistance = isDarkMode ? 20000 : 15000;
+    
     for (let a = 0; a < particlesArray.length; a++) {
         for (let b = a; b < particlesArray.length; b++) {
             let dx = particlesArray[a].x - particlesArray[b].x;
             let dy = particlesArray[a].y - particlesArray[b].y;
             let distanceSq = (dx * dx) + (dy * dy);
             
-            if (distanceSq < 15000) {
-                opacityValue = 1 - (distanceSq / 15000);
-                ctx.strokeStyle = 'rgba(0, 113, 227,' + (opacityValue * 0.4) + ')';
+            if (distanceSq < connectionDistance) {
+                opacityValue = 1 - (distanceSq / connectionDistance);
+                let strokeAlpha = isDarkMode ? (opacityValue * 0.8) : (opacityValue * 0.4);
+                let rgb = isDarkMode ? '41, 151, 255' : '0, 113, 227';
+                
+                ctx.strokeStyle = `rgba(${rgb}, ${strokeAlpha})`;
                 ctx.lineWidth = 1;
+                // Remove shadow blur for lines for performance
+                ctx.shadowBlur = 0;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                 ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
@@ -150,15 +206,19 @@ function connect() {
         }
     }
     
+    let mouseConnection = isDarkMode ? 30000 : 20000;
     if (mouse.x && mouse.y) {
         for (let a = 0; a < particlesArray.length; a++) {
             let dx = particlesArray[a].x - mouse.x;
             let dy = particlesArray[a].y - mouse.y;
             let distanceSq = (dx * dx) + (dy * dy);
             
-            if (distanceSq < 20000) {
-                opacityValue = 1 - (distanceSq / 20000);
-                ctx.strokeStyle = 'rgba(0, 113, 227,' + (opacityValue * 0.6) + ')';
+            if (distanceSq < mouseConnection) {
+                opacityValue = 1 - (distanceSq / mouseConnection);
+                let strokeAlpha = isDarkMode ? (opacityValue * 0.9) : (opacityValue * 0.6);
+                let rgb = isDarkMode ? '41, 151, 255' : '0, 113, 227';
+                
+                ctx.strokeStyle = `rgba(${rgb}, ${strokeAlpha})`;
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
                 ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
