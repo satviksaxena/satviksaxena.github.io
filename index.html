@@ -138,21 +138,47 @@
         // Dark Mode Toggle Logic
         const themeToggle = document.getElementById('theme-toggle');
         const icon = themeToggle.querySelector('i');
-        
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-            icon.classList.replace('fa-moon', 'fa-sun');
+
+        function setTheme(isDark) {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                document.body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
         }
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
+        function determineTheme() {
+            const storedTheme = localStorage.getItem('satvik_portfolio_theme');
+            if (storedTheme) {
+                return storedTheme === 'dark';
             }
+            
+            const hour = new Date().getHours();
+            const isNightTime = hour >= 18 || hour < 6;
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            
+            return isNightTime || prefersDark;
+        }
+
+        // Apply theme on load
+        setTheme(determineTheme());
+
+        // Listen for system theme changes
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+            if (!localStorage.getItem('satvik_portfolio_theme')) {
+                setTheme(determineTheme());
+            }
+        });
+
+        // Toggle button override
+        themeToggle.addEventListener('click', () => {
+            const isCurrentlyDark = document.body.classList.contains('dark-mode');
+            setTheme(!isCurrentlyDark);
+            localStorage.setItem('satvik_portfolio_theme', !isCurrentlyDark ? 'dark' : 'light');
         });
 
         // Custom Cursor Aura
